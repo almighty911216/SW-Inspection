@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hanium Inspection Layout</title>
+    <!-- Latest compiled and minified CSS -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.1.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+    <style type="text/css">
+        .sidebar-nav li {
+            list-style-type: none;
+            margin: 0;
+            padding: 10px 5px 0 5px;
+            position: relative
+        }
+
+        .sidebar-nav li::before,
+        .sidebar-nav li::after {
+            content: '';
+            left: -20px;
+            position: absolute;
+            right: auto
+        }
+
+        .sidebar-nav li::before {
+            border-left: 1px solid #999;
+            bottom: 50px;
+            height: 100%;
+            top: 0;
+            width: 1px
+        }
+
+        .sidebar-nav li::after {
+            border-top: 1px solid #999;
+            height: 20px;
+            top: 25px;
+            width: 25px
+        }
+
+        .sidebar-nav li span {
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            display: inline-block;
+            padding: 3px 8px;
+            text-decoration: none
+        }
+
+        .sidebar-nav li.parent_li>span {
+            cursor: pointer
+        }
+
+        .sidebar-nav>ul>li::before,
+        .sidebar-nav>ul>li::after {
+            border: 0
+        }
+
+        .sidebar-nav li:last-child::before {
+            height: 30px
+        }
+
+        .sidebar-nav li.parent_li>span:hover,
+        .sidebar-nav li.parent_li>span:hover+ul li span {
+            background: #eee;
+            border: 1px solid #94a0b4;
+            color: #000
+        }
+        .mem_box{
+          border:4px solid;
+          padding-top: 4px;
+        }
+    </style>
+    <script type='text/javascript'>
+        $(window).load(function() {
+            $(function() {
+                $('.sidebar-nav li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+                $('.sidebar-nav li.parent_li > span').on('click', function(e) {
+                    var children = $(this).parent('li.parent_li').find(' > ul > li');
+                    if (children.is(":visible")) {
+                        children.hide('fast');
+                        $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-folder-close').removeClass('icon-folder-open');
+                    } else {
+                        children.show('fast');
+                        $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-folder-open').removeClass('icon-folder-close');
+                    }
+                    e.stopPropagation();
+                });
+            });
+        });
+
+        $(function() {
+            $('ul.nav-tabs a').click(function(e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+        })
+
+        $(function() {
+            $('div.list-group a').click(function(e) {
+                $(this).tab('show')
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+    <br>
+    <ul class="nav nav-tabs">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" href="#">Hanium Inspection</a>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#main" target="_blank">Main</a></li>
+                    <li><a href="#convention" target="_blank">Convention</a></li>
+                    <li><a href="#review" target="_blank">Review</a></li>
+                </ul>
+
+                <div class="btn-group pull-right">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-user"></i> Username
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Sign Out</a></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">Setting</button>
+
+            </div>
+        </div>
+    </ul>
+    <div class="tab-content">
+    <div id="convention" class="tab-pane fade">
+      <div class="span3 sidebar">
+            <div class="sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">
+                        <span><i class="icon-folder-open"></i> Parent</span>
+                        <ul>
+                            <li>
+                                <span><i class="icon-folder-open"></i> Child</span>
+                                <ul>
+                                    <li>
+                                        <i class="icon-file"></i> Grand Child
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span><i class="icon-folder-open"></i> Child</span>
+                                <ul>
+                                    <li>
+                                        <i class="icon-file"></i> Grand Child
+                                    </li>
+                                    <li>
+                                        <span><i class="icon-folder-open"></i> Grand Child</span>
+                                        <ul>
+                                            <li>
+                                                <span><i class="icon-folder-open"></i> Great Grand Child</span>
+                                                <ul>
+                                                    <li>
+                                                        <i class="icon-file"></i> Great great Grand Child
+                                                    </li>
+                                                    <li>
+                                                        <i class="icon-file"></i> Great great Grand Child
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <i class="icon-file"></i> Great Grand Child
+                                            </li>
+                                            <li>
+                                                <i class="icon-file"></i> Great Grand Child
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <i class="icon-file"></i> Grand Child
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span><i class="icon-folder-open"></i> Parent2</span>
+                        <ul>
+                            <li>
+                                <i class="icon-file"></i> Child
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class=" row">
+              <div class="span3 memlist">
+                <hr>
+                <label for="memlist">Member list</label>
+                <div class="mem_box">
+                  <ul>
+                    <li>Member1</li>
+                    <li>Member2</li>
+                    <li>Member3</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      <div class="span9 main">
+          <div class="cpp">
+            <ul class="nav nav-tabs">
+              <li role="presentation" class="active"><a href="#">1.cpp</a></li>
+              <li role="presentation"><a href="#">2.cpp</a></li>
+              <li role="presentation"><a href="#">3.cpp</a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-bold" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-italic" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-text-height" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>
+            </button>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                style
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Dropdown link</a></li>
+                <li><a href="#">Dropdown link</a></li>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </button>
+
+
+          </div>
+          <div class="codeviewer">
+            <textarea class="span9" rows="25" cols="40" name="1.cpp"></textarea>
+          </div>
+        </div>
+
+      <div class="span3 right">
+        <div class="span3 right-side">
+              <label for="guide"><h2>Simple Guide</h2></label>
+              <textarea class="span3" name="guide" rows=10 cols="40"></textarea>
+        </div>
+
+        <div class="span3 right-bottom">
+            <label for="History">
+              <h2>History
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">
+                  <span class="glyphicon glyphicon-cog"></span></button>
+
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title">History</h2>
+                      </div>
+                      <div class="modal-menu">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            File <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Open</a></li>
+                            <li><a href="#">Open Recent</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Save</a></li>
+                            <li><a href="#">Save as</a></li>
+                            <li><a href="#">Extract</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Toggle Item</a></li>
+                            <li><a href="#">Disabled Item</a></li>
+                            <li><a href="#">Exit</a></li>
+                          </ul>
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Edit <span class="caret"></span>
+                          </button>
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            View <span class="caret"></span>
+                          </button>
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Help <span class="caret"></span>
+                          </button>
+                        </div>
+
+                      <div class="modal-body">
+                        <p>History chart&hellip;</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default">Ok</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+                        <button type="button" class="btn btn-default">adapt</button>
+                        <button type="button" class="btn btn-default">help</button>
+                      </div>
+                    </div>
+
+                </div>
+              </h2>
+            </label>
+            <textarea class="span3" name="History"  rows=10 cols="40">
+            </textarea>
+        </div>
+
+      </div>
+
+      <div class="span12 center-bottom">
+        <div class="vfs">
+          <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">variable</a></li>
+            <li role="presentation"><a href="#">function</a></li>
+            <li role="presentation"><a href="#">statement</a></li>
+            <li role="presentation"><a href="#">+</a></li>
+          </ul>
+        </div>
+        <div class="line..">
+          <textarea class="span12" rows="5" cols="40" name="line"></textarea>
+        </div>
+
+
+
+
+
+
+      </div>
+      </div>
+
+
+<div id="main" class="tab-pane fade in active">
+        <div class="span3 sidebar">
+            <div class="sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">
+                        <span><i class="icon-folder-open"></i> Parent</span>
+                        <ul>
+                            <li>
+                                <span><i class="icon-folder-open"></i> Child</span>
+                                <ul>
+                                    <li>
+                                        <i class="icon-file"></i> Grand Child
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span><i class="icon-folder-open"></i> Child</span>
+                                <ul>
+                                    <li>
+                                        <i class="icon-file"></i> Grand Child
+                                    </li>
+                                    <li>
+                                        <span><i class="icon-folder-open"></i> Grand Child</span>
+                                        <ul>
+                                            <li>
+                                                <span><i class="icon-folder-open"></i> Great Grand Child</span>
+                                                <ul>
+                                                    <li>
+                                                        <i class="icon-file"></i> Great great Grand Child
+                                                    </li>
+                                                    <li>
+                                                        <i class="icon-file"></i> Great great Grand Child
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <i class="icon-file"></i> Great Grand Child
+                                            </li>
+                                            <li>
+                                                <i class="icon-file"></i> Great Grand Child
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <i class="icon-file"></i> Grand Child
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span><i class="icon-folder-open"></i> Parent2</span>
+                        <ul>
+                            <li>
+                                <i class="icon-file"></i> Child
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="span3 btn-group-vertical" role="group" aria-label="...">
+            <hr>
+  <button type="button" class="btn btn-default">Rule Setting</button>
+  <button type="button" class="btn btn-default">Member of</button>
+  <button type="button" class="btn btn-default">Today's issue</button>
+            <hr>
+</div>
+<!--calender-->
+        <div class="span3">
+        	<div class="row">
+              <div class="span12">
+                		<table class="table-condensed table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                  <th colspan="7">
+                                    <span class="btn-group">
+                                        <a class="btn"><i class="icon-chevron-left"></i></a>
+                                    	<a class="btn active">August 2017</a>
+                                    	<a class="btn"><i class="icon-chevron-right"></i></a>
+                                    </span>
+                                  </th>
+                                </tr>
+                                <tr>
+                                    <th>Su</th>
+                                    <th>Mo</th>
+                                    <th>Tu</th>
+                                    <th>We</th>
+                                    <th>Th</th>
+                                    <th>Fr</th>
+                                    <th>Sa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="muted">30</td>
+                                    <td class="muted">31</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                    <td>9</td>
+                                    <td class="btn-primary"><strong>10</strong></td>
+                                    <td>11</td>
+                                    <td>12</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>14</td>
+                                    <td>15</td>
+                                    <td>16</td>
+                                    <td>17</td>
+                                    <td>18</td>
+                                    <td>19</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>21</td>
+                                    <td>22</td>
+                                    <td>23</td>
+                                    <td>24</td>
+                                    <td>25</td>
+                                    <td>26</td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td>28</td>
+                                    <td>29</td>
+                                    <td>30</td>
+                                    <td>31</td>
+                                    <td class="muted">1</td>
+                                    <td class="muted">2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            	</div>
+            </div>
+
+        </div>
+
+        <div class="span12 main" >
+             <textarea class="span3" name="add-pro1" id="add-pro1" rows="8" cols="80"> Add project </textarea>
+             <textarea class="span3" name="add-pro2" id="add-pro2" rows="8" cols="80"> Sample </textarea>
+         </div>
+
+</div>
+</div>
+
+
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" id="myModal" role="dialog" >
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <nav class="navbar navbar-default navbar-fixed-top">
+                        <div>
+                            <ul class="nav navbar-nav nav-tabs">
+                                <li class="active"><a href="#first">들여쓰기</a></li>
+                                <li><a href="#second">함수명</a></li>
+                                <li><a href="#third">변수명</a></li>
+
+                                <li><a href="#fourth">주석</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content" style="80px;">
+                        <div class="tab-pane fade active in" id="first">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="list-group">
+                                        <a href="#opt1" class="list-group-item">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">Option 1</label>
+                                            </div>
+                                        </a>
+                                        <a href="#opt2" class="list-group-item">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">Option 2</label>
+                                            </div>
+                                        </a>
+                                        <a href="#opt3" class="list-group-item">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">Option 3</label>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-8">
+
+
+                                        <div class="list-pane fade active" id="opt1">
+                                            option1
+                                        </div>
+                                        <div class="list-pane fade" id="opt2">
+                                            option2
+                                        </div>
+                                        <div class="list-pane fade" id="opt3">
+                                            option3
+                                        </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane fade" id="second">
+                            <p>
+                                두번째 탭포커스 위치할 내용입니다.<br/> data-togge="tab"을 지정해주셔야 탭버튼으로 인식을 합니다.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="third">
+                            <p>
+                                세번째 탭클릭시 보여지는 컨텐츠 내용입니다.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="fourth">
+                            <p>
+                                마지막 네번째 탭클릭시 보여지는 컨텐츠 내용입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">적용</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Help</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>
+
+        // tell the embed parent frame the height of the content
+        if (window.parent && window.parent.parent) {
+            window.parent.parent.postMessage(["resultsFrame", {
+                height: document.body.getBoundingClientRect().height,
+                slug: "None"
+            }], "*")
+        }
+    </script>
+</body>
+
+</html>
